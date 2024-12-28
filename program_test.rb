@@ -20,4 +20,15 @@ class AddTest < Test::Unit::TestCase
     result = @program.add('1, 2, 3')
     assert_equal 6, result
   end
+
+  def test_add_with_new_lines
+    result = @program.add("1\n2,3")
+    assert_equal 6, result
+
+    result = @program.add("1,2\n\n4,3")
+    assert_equal 10, result
+
+    result = @program.add("\n1,2\n\n4,3\n")
+    assert_equal 10, result
+  end
 end
