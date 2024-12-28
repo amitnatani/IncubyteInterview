@@ -3,11 +3,7 @@ class Program
   def add(numbers)
     return 0 if numbers.empty?
     negatives = []
-    delimeter = ','
-    if numbers.start_with?("//")
-      delimeter = numbers[2]
-      numbers = numbers[3..]
-    end
+    numbers, delimeter = find_delimeter(numbers)
     sum = 0
     numbers.split(delimeter).each do |number|
       if number.include?("\n")
@@ -30,5 +26,14 @@ class Program
     return if number.to_i >= 0
 
     negatives << number.to_i
+  end
+
+  def find_delimeter(numbers)
+    delimeter = ','
+    if numbers.start_with?("//")
+      delimeter = numbers[2]
+      numbers = numbers[3..]
+    end
+    [numbers, delimeter]
   end
 end
